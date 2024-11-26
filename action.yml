@@ -1,0 +1,21 @@
+name: 'Check AWS CodeCommit repo'
+description: 'Check an AWS CodeCommit repo exists and get the url. Option to create if repo does not exist'
+branding:
+  icon: 'git-branch'
+  color: 'blue'
+
+inputs:
+  repo-name:
+    type: string
+    required: true
+  create-if-missing:
+    type: bool
+    default: false
+
+outputs:
+  repo-url:
+    description: 'url of existing or newly created codecommit repo'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
