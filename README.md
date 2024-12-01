@@ -17,7 +17,7 @@ Simple action to check if AWS Codecommit repo exists and can be accessed. Option
 
 ### Example ###
 
-On merge to main check if the CodeCommit repo exists and sync github branch to it.
+On push to any branch check if the CodeCommit repo exists and sync github branch to it.
 
 Configured aws IAM role credentials using [GitHub OIDC](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
 
