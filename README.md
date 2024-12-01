@@ -1,6 +1,6 @@
 # Check AWS CodeCommit repo #
 
-Simple action to get to check if AWS Codecommit repo exists and can be accessed. Option to create the repo if it does not exist. Outputs the CodeCommit repo url. 
+Simple action to check if AWS Codecommit repo exists and can be accessed. Option to create the repo if it does not exist. Outputs the CodeCommit repo url. 
 
 ### Usage ###
 ```yml
@@ -13,11 +13,15 @@ Simple action to get to check if AWS Codecommit repo exists and can be accessed.
 ```
 
 ### Output ###
-**repo-url**
+**repo-url:** http clone url for codecommit repo
 
 ### Example ###
 
-On merge to main check if the CodeCommit repo exists and sync github branch to it
+On merge to main check if the CodeCommit repo exists and sync github branch to it.
+
+Configured aws IAM role credentials using [GitHub OIDC](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services)
+
+Assumed role of course needs CodeCommit permissions.
 
 ```yml
 on: 
@@ -52,8 +56,8 @@ jobs:
 
   - name: Push branch to CodeCommit
     run: |
-        git config --global credential.helper "!aws codecommit credential-helper $@"
-        git config --global credential.UseHttpPath true
-        git remote add codecommit ${{steps.check-codecommit.outputs.repo-url}}
-        git push codecommit ${branch}
+      git config --global credential.helper "!aws codecommit credential-helper $@"
+      git config --global credential.UseHttpPath true
+      git remote add codecommit ${{steps.check-codecommit.outputs.repo-url}}
+      git push codecommit
 ```
